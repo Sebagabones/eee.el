@@ -154,6 +154,9 @@ DESTINATION can be:
   (ee-message "destination file is: %s" destination-file)
   (let* ((destination (shell-command-to-string
 					   (format "cat %s" destination-file)))
+         (ee-message "destination is: %s" destination)
+               (ee-jump destination)
+
 		 (destination (string-trim destination)))
 	(unless (string-empty-p destination)
           (ee-message "destination is: %s" destination)
