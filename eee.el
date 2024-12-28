@@ -149,17 +149,13 @@ DESTINATION can be:
 	  (when pdf-page-num
 		(pdf-view-goto-page pdf-page-num)))))
 
-;; destination-file is a temporary file, it's content is the desitination we want to jump 
+
+;; destination-file is a temporary file, it's content is the desitination we want to jump
 (defun ee-jump-from(destination-file)
-  (ee-message "destination file is: %s" destination-file)
   (let* ((destination (shell-command-to-string
 					   (format "cat %s" destination-file)))
-         (ee-message "destination is: %s" destination)
-               (ee-jump destination)
-
 		 (destination (string-trim destination)))
 	(unless (string-empty-p destination)
-          (ee-message "destination is: %s" destination)
       (ee-jump destination))))
 
 (defun ee-join-args(args)
