@@ -115,6 +115,7 @@ NAME is passed to `ee-start-terminal-function'."
 	(string-match-p "^[-+]?[0-9]+$" str)))
 
 (defun ee-jump (destination)
+  (ee-message "destination is: %s" destination)
   "Jump to DESTINATION, which can be a file path with optional line and column numbers.
 DESTINATION can be:
 - /path/to/file
@@ -150,6 +151,7 @@ DESTINATION can be:
 
 ;; destination-file is a temporary file, it's content is the desitination we want to jump 
 (defun ee-jump-from(destination-file)
+  (ee-message "destination is: %s" destination)
   (let* ((destination (shell-command-to-string
 					   (format "cat %s" destination-file)))
 		 (destination (string-trim destination)))
