@@ -19,7 +19,7 @@
 
 (defcustom ee-terminal-options
   '(("wezterm" .
-	 "--config enable_wayland=false --config enable_tab_bar=false --config initial_cols=180 --config initial_rows=50 --config window_decorations=\\\"NONE\\\"")
+	 "--config enable_wayland=false --config enable_tab_bar=false --config initial_cols=180 --config initial_rows=50 --config window_decorations=\\\"NONE\\\" spawn --floating-pane lazygit")
 	("alacritty" .
 	 "--option=window.decorations=\\\"None\\\" --option=window.dimensions.columns=180 --option=window.dimensions.lines=50")
 	("kitty" . "--title ee-kitty")
