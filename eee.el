@@ -12,7 +12,7 @@
 ;; Make Emacs Great Again!
 
 ;; specify which terminal for ee-* commands to use. alacritty, wezterm, kitty, or konsole?
-(defcustom ee-terminal-command "wezterm cli spawn --floating-pane"
+(defcustom ee-terminal-command "wezterm"
   "The terminal command to use for ee-* commands."
   :type 'string
   :group 'eee)
@@ -20,8 +20,8 @@
 (defcustom ee-terminal-options
   ;; '(("wezterm" .
   ;;        "--config enable_wayland=false --config enable_tab_bar=false --config initial_cols=180 --config initial_rows=50 --config window_decorations=\\\"NONE\\\" spawn --floating-pane lazygit")
-         '(("wezterm cli spawn --floating-pane" .
-	 "--config enable_wayland=false --config enable_tab_bar=false --config initial_cols=180 --config initial_rows=50 --config window_decorations=\\\"NONE\\\"")
+         '(("wezterm" .
+	 "cli spawn --floating-pane")
 	("alacritty" .
 	 "--option=window.decorations=\\\"None\\\" --option=window.dimensions.columns=180 --option=window.dimensions.lines=50")
 	("kitty" . "--title ee-kitty")
