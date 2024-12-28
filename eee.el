@@ -32,7 +32,7 @@
   :group 'eee)
 
 ;; enable ee-function's debug message?
-(defcustom ee-debug-message nil
+(defcustom ee-debug-message t
   "if t, then eee.el will print debug message to message buffer"
   :type 'boolean
   :group 'eee)
