@@ -12,7 +12,7 @@
 ;; Make Emacs Great Again!
 
 ;; specify which terminal for ee-* commands to use. alacritty, wezterm, kitty, or konsole?
-(defcustom ee-terminal-command "wezterm cli spawn --floating-pane lazygit"
+(defcustom ee-terminal-command "wezterm cli spawn --floating-pane"
   "The terminal command to use for ee-* commands."
   :type 'string
   :group 'eee)
