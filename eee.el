@@ -151,7 +151,7 @@ DESTINATION can be:
 ;; destination-file is a temporary file, it's content is the desitination we want to jump 
 (defun ee-jump-from(destination-file)
   (let* ((destination (shell-command-to-string
-					   (format "cat %s" destination-file)))
+					   (format "\cat %s" destination-file)))
 		 (destination (string-trim destination)))
 	(unless (string-empty-p destination)
       (ee-jump destination))))
