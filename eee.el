@@ -19,9 +19,9 @@
 
 (defcustom ee-terminal-options
   '(("wezterm" .
-         "--config enable_wayland=false --config enable_tab_bar=false --config initial_cols=180 --config initial_rows=50 --config window_decorations=\\\"NONE\\\" spawn --floating-pane lazygit")
+	 "--config enable_wayland=false --config enable_tab_bar=false --config initial_cols=180 --config initial_rows=50 --config window_decorations=\\\"NONE\\\"")
 	("alacritty" .
-	 "--option=window.dimensions.columns=180 --option=window.dimensions.lines=50") ;did remove this form start of this line --option=window.decorations=\\\"None\\\"
+	 "--option=window.dimensions.columns=150 --option=window.dimensions.lines=40") ;did remove this form start of this line --option=window.decorations=\\\"None\\\"
 	("kitty" . "--title ee-kitty")
 	("konsole" . "--hide-menubar")
 	)
@@ -30,7 +30,7 @@
   :group 'eee)
 
 ;; enable ee-function's debug message?
-(defcustom ee-debug-message t
+(defcustom ee-debug-message nil
   "if t, then eee.el will print debug message to message buffer"
   :type 'boolean
   :group 'eee)
@@ -61,7 +61,7 @@ The terminal emulator is specified in `ee-terminal-command'.
 See `ee-start-terminal-function' for the usage.
 "
   (let* ((options (ee-get-terminal-options))
-	     (full-command (format "%s %s bash -c '%s'"
+	     (full-command (format "%s %s -e bash -c '%s'"
 			                   ee-terminal-command
 			                   options
 							   command))
@@ -113,7 +113,6 @@ NAME is passed to `ee-start-terminal-function'."
 	(string-match-p "^[-+]?[0-9]+$" str)))
 
 (defun ee-jump (destination)
-  (ee-message "destination is: %s" destination)
   "Jump to DESTINATION, which can be a file path with optional line and column numbers.
 DESTINATION can be:
 - /path/to/file
@@ -147,8 +146,7 @@ DESTINATION can be:
 	  (when pdf-page-num
 		(pdf-view-goto-page pdf-page-num)))))
 
-
-;; destination-file is a temporary file, it's content is the desitination we want to jump
+;; destination-file is a temporary file, it's content is the desitination we want to jump 
 (defun ee-jump-from(destination-file)
   (let* ((destination (shell-command-to-string
 					   (format "cat %s" destination-file)))
