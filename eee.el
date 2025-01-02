@@ -259,7 +259,7 @@ CALLBACK is an optional callback to be called after the script runs."
 		   )
 (ee-define "ee-spotify-player"
            default-directory
-           "spotify_player"
+           "spotify_player;"
            nil
            ignore
            )
