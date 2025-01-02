@@ -21,7 +21,7 @@
   '(("wezterm" .
 	 "--config enable_wayland=false --config enable_tab_bar=false --config initial_cols=180 --config initial_rows=50 --config window_decorations=\\\"NONE\\\"")
 	("alacritty" .
-	 "--option=window.dimensions.columns=150 --option=window.dimensions.lines=40") ;did remove this form start of this line --option=window.decorations=\\\"None\\\"
+	 "--option=window.decorations=\\\"None\\\ --option=window.dimensions.columns=150 --option=window.dimensions.lines=40")
 	("kitty" . "--title ee-kitty")
 	("konsole" . "--hide-menubar")
 	)
