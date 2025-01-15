@@ -3,8 +3,11 @@
 CURR_DIR=$(dirname $(readlink -f $0))
 . ${CURR_DIR}/eee-common.sh
 
-FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --exclude target' \
+INITIAL_QUERY="$1"
+
+FZF_DEFAULT_COMMAND='fd --type f --type l --hidden --exclude .git --exclude target' \
 	fzf \
+    --query "$INITIAL_QUERY" \
 	--border \
 	--color "border:#A15ABD" \
 	--header-first \
