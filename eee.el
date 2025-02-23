@@ -26,6 +26,7 @@
 	("konsole" . "--hide-menubar")
 	)
 
+
   "The terminal command options to use for ee-* commands."
   :type 'alist
   :group 'eee)
@@ -106,7 +107,9 @@ NAME is passed to `ee-start-terminal-function'."
   (let ((project-dir-command
 		  (format  "git rev-parse --show-toplevel 2> /dev/null || echo -n %s"
             default-directory)))
-    (ee--normalize-path (shell-command-to-string project-dir-command))))
+    (ee--normalize-path (or (when-let (project (project-current))
+                              (project-root project))
+                          (shell-command-to-string project-dir-command) ))))
 
 
 (defun ee-integer-p(str)
@@ -210,9 +213,11 @@ CALLBACK is an optional callback to be called after the script runs."
 
 (defun ee-region-text()
   (when (use-region-p)
+    (prog1
     (buffer-substring-no-properties
 	  (region-beginning)
-	  (region-end))))
+	  (region-end))
+    (deactivate-mark))))
 
 
 ;;;;;; define ee commands here: ee-rg, ee-line, ee-yazi, etc. ;;;;;;;;;;;
@@ -225,7 +230,7 @@ CALLBACK is an optional callback to be called after the script runs."
 
 (ee-define "ee-lazygit" default-directory (ee-script-path "eee-lazygit.sh") nil ignore)
 
-(ee-define "ee-rg" default-directory (ee-script-path "eee-rg.sh") (list (ee-region-text) ) ee-jump-from)
+(ee-define "ee-rg" (ee-get-project-dir-or-current-dir) (ee-script-path "eee-rg.sh") (list (ee-region-text)) ee-jump-from)
 
 (ee-define "ee-rga" default-directory (ee-script-path "eee-rga.sh")
   (list
@@ -275,5 +280,19 @@ CALLBACK is an optional callback to be called after the script runs."
   nil
   ignore
   )
+
+(ee-define "ee-project-switch" default-directory
+  "fd --color=always --type dir --exact-depth 3 \"\"  ~/Projects | fzf --ansi --exact --style full --layout reverse --preview \"eza --tree -L 3 --color always --icons always {}\" "
+  nil ee-jump-from)
+
+(defvar ee-keymap (make-sparse-keymap)
+  "Keymap for ee-* commands.")
+(define-key ee-keymap (kbd "f") 'ee-find)
+(define-key ee-keymap (kbd "g") 'ee-lazygit)
+(define-key ee-keymap (kbd "y") 'ee-yazi)
+(define-key ee-keymap (kbd "Y") 'ee-yazi-project)
+(define-key ee-keymap (kbd "r") 'ee-rg)
+(define-key ee-keymap (kbd "l") 'ee-line)
+
 
 (provide 'eee)
